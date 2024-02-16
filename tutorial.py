@@ -8,7 +8,7 @@ pygame.init()
 
 pygame.display.set_caption("Platformer")
 
-WIDTH, HEIGHT = 800,650
+WIDTH, HEIGHT = 1000,650
 FPS = 50
 PLAYER_VEL = 5
 
@@ -62,7 +62,7 @@ class Player(pygame.sprite.Sprite):
         self.x_vel = 0
         self.y_vel = 0
         self.mask = None
-        self.direction = "left"
+        self.direction = "right"
         self.animation_count = 0
         self.fall_count = 0
         self.jump_count = 0
@@ -266,21 +266,65 @@ def handle_move(player,objects):
 
 def main(window):
     clock = pygame.time.Clock()
-    background, bg_image = get_background("Blue.png")
+    background, bg_image = get_background("Pink.png")
 
     block_size = 96
 
     player = Player(100,100,50,50)
-    fire = Fire(100,HEIGHT-block_size-65,16,32)#16-32 is the diemensions of the image.
-    fire.on()
+    fire1 = Fire(100,HEIGHT-block_size-65,16,32)#16-32 is the diemensions of the image.
+    fire2 = Fire(165,HEIGHT-block_size-65,16,32)
+    fire3 = Fire(230,HEIGHT-block_size-65,16,32)
+    fire4 = Fire(295,HEIGHT-block_size-65,16,32)
+    fire5 = Fire(360,HEIGHT-block_size-65,16,32)
+    fire6 = Fire(435,HEIGHT-block_size-65,16,32) 
+    fire7 = Fire(500,HEIGHT-block_size-65,16,32) 
+
+    fire8 = Fire(1245,HEIGHT-block_size-65,16,32)
+    fire9 = Fire(1310,HEIGHT-block_size-65,16,32)
+    fire10 = Fire(1375,HEIGHT-block_size-65,16,32)
+    fire11 = Fire(1440,HEIGHT-block_size-65,16,32)
+    fire12 = Fire(1505,HEIGHT-block_size-65,16,32)
+    fire13 = Fire(1570,HEIGHT-block_size-65,16,32)
+    fire14 = Fire(1635,HEIGHT-block_size-65,16,32)
+    fire15 = Fire(3140,HEIGHT-block_size-65,16,32)
+    fire16 = Fire(3205,HEIGHT-block_size-65,16,32)
+    fire1.on(),fire2.on(),fire3.on(),fire4.on(),fire5.on(),fire6.on(),fire7.on(),fire8.on(),fire9.on(),fire10.on(),fire11.on()
+    fire12.on(), fire13.on(), fire14.on(), fire15.on(), fire16.on()
+
     floor = [Block(i*block_size, HEIGHT-block_size, block_size)
-             for i in range(-WIDTH//block_size, (WIDTH*2)//block_size)]
+             for i in range(0,(WIDTH*4)//block_size)]
+    blocks = [Block(i*90+730, HEIGHT-block_size*3.5, block_size)
+            for i in range(1,6)]
     
-    objects = [*floor, Block(0,HEIGHT-block_size*2, block_size), 
-               Block(block_size*3,HEIGHT-block_size*4, block_size),fire]
+    blocks2 = [Block((i*90+1560), HEIGHT-block_size*3.5, block_size)
+            for i in range(1,6)]
+    
+    blocks3 = [Block((i*90+2600), HEIGHT-block_size*4.5, block_size)
+            for i in range(1,6)]
+    
+    blocks4 = [Block(3300, HEIGHT-block_size*(5+i), block_size)
+                for i in range(0,3)]
+    
+    blocks5 = [Block(3300, HEIGHT-block_size*(2+i), block_size)
+                for i in range(0,2)]
+
+
+
+    objects = [*floor,Block(0,HEIGHT-block_size*2, block_size),Block(0,HEIGHT-block_size*3, block_size),Block(0,HEIGHT-block_size*4, block_size),
+               Block(0,HEIGHT-block_size*5, block_size),Block(0,HEIGHT-block_size*6, block_size),Block(0,HEIGHT-block_size*7, block_size),#Floor and left pillar
+               
+               Block(100,HEIGHT-block_size*4, block_size),
+               Block(445,HEIGHT-block_size*4, block_size),
+
+               Block(540,HEIGHT-block_size*5, block_size),
+               Block(540,HEIGHT-block_size*6, block_size),
+               Block(2400, HEIGHT-block_size*4, block_size),
+               
+               fire1,fire2,fire3,fire4,fire5,fire6,fire7,fire8,fire9,fire10,fire11,fire12,fire13,fire14,fire15,fire16,*blocks, *blocks2
+               ,*blocks3,*blocks4,*blocks5]
     
     offset_x = 0
-    scroll_area_width = 200
+    scroll_area_width = 250
 
 
     run = True
@@ -300,7 +344,8 @@ def main(window):
                     player.jump()
 
         player.loop(FPS)
-        fire.loop()
+        fire1.loop(),fire2.loop(),fire3.loop(),fire4.loop(),fire5.loop(),fire6.loop(),fire7.loop(),
+        fire8.loop(),fire9.loop(),fire10.loop(),fire11.loop(),fire12.loop(),fire13.loop(),fire14.loop(),fire15.loop(),fire16.loop()
         handle_move(player,objects)
         draw(window, background, bg_image,player, objects,offset_x)
 
