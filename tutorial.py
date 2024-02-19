@@ -1,6 +1,3 @@
-import os 
-import random
-import math
 import pygame
 from os import listdir
 from os.path import isfile,join
@@ -8,7 +5,7 @@ pygame.init()
 
 pygame.display.set_caption("Platformer")
 
-WIDTH, HEIGHT = 1000,650
+WIDTH, HEIGHT = 1280,670
 FPS = 50
 PLAYER_VEL = 5
 
@@ -266,7 +263,7 @@ def handle_move(player,objects):
 
 def main(window):
     clock = pygame.time.Clock()
-    background, bg_image = get_background("Pink.png")
+    background, bg_image = get_background("Gray.png")
 
     block_size = 96
 
@@ -292,7 +289,7 @@ def main(window):
     fire12.on(), fire13.on(), fire14.on(), fire15.on(), fire16.on()
 
     floor = [Block(i*block_size, HEIGHT-block_size, block_size)
-             for i in range(0,(WIDTH*4)//block_size)]
+            for i in range(0,(WIDTH*3)//block_size)]
     blocks = [Block(i*90+730, HEIGHT-block_size*3.5, block_size)
             for i in range(1,6)]
     
@@ -307,6 +304,9 @@ def main(window):
     
     blocks5 = [Block(3300, HEIGHT-block_size*(2+i), block_size)
                 for i in range(0,2)]
+    
+    blocks6 = [Block((i*block_size)+3500, HEIGHT-block_size, block_size)
+                for i in range(0,5)]
 
 
 
@@ -321,7 +321,7 @@ def main(window):
                Block(2400, HEIGHT-block_size*4, block_size),
                
                fire1,fire2,fire3,fire4,fire5,fire6,fire7,fire8,fire9,fire10,fire11,fire12,fire13,fire14,fire15,fire16,*blocks, *blocks2
-               ,*blocks3,*blocks4,*blocks5]
+               ,*blocks3,*blocks4,*blocks5,*blocks6]
     
     offset_x = 0
     scroll_area_width = 250
